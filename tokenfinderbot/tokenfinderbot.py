@@ -3,6 +3,7 @@ from .utils import *
 from dotmap import DotMap
 from datetime import datetime
 from schedule import repeat, every, run_pending
+from tokenfinderbot.db import PoolDB
 
 class TokenBot:
     """TokenBot class

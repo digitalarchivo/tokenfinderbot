@@ -1,9 +1,8 @@
-from .db import PoolDB
-from .utils import *
+from tokenfinderbot.db import PoolDB
+from tokenfinderbot.utils import *
 from dotmap import DotMap
 from datetime import datetime
 from schedule import repeat, every, run_pending
-from tokenfinderbot.db import PoolDB
 
 class TokenBot:
     """TokenBot class
@@ -14,12 +13,12 @@ class TokenBot:
         default_settings = {
             'time_filter': {
                 'hours': 12,
-                'minutes': 0
+               'minutes': 0
             },
             'liq_mc_filter': {
-                'mc_liq_ratio': 1.5,
-                'min_liq': 1000,
-                'min_mc': 100000
+               'mc_liq_ratio': 1.5,
+               'min_liq': 1000,
+               'min_mc': 100000
             },
             'telegram': {
                 'notify': False,
@@ -49,7 +48,7 @@ class TokenBot:
         """
 
         # Check if the setting dict includes all the keys
-        if {'time_filter', 'liq_mc_filter', 'update_interval', 'db_name'} <= set(settings.toDict()) and {'hours', 'minutes'} <= set(settings.time_filter.toDict()) and {'mc_liq_ratio', 'min_liq', 'min_mc'} <= set(settings.liq_mc_filter.toDict()):
+        if {'time_filter', 'liq_mc_filter', 'update_interval', 'db_name'} <= set(settings.toDict()) and {'hours','minutes'} <= set(settings.time_filter.toDict()) and {'mc_liq_ratio','min_liq','min_mc'} <= set(settings.liq_mc_filter.toDict()):
             self._settings = settings
         else:
             raise (KeyError("Invalid settings dict"))
@@ -111,7 +110,7 @@ class TokenBot:
             BaseException: Error in telegram communication
         """
         tsettings = self._settings.telegram
-        if tsettings.notify and tsettings.bot_token != "" and tsettings.chat_id != "":
+        if tsettings.notify and tsettings.bot_token!= "" and tsettings.chat_id!= "":
             try:
                 url = f'https://api.telegram.org/bot{tsettings.bot_token}/sendMessage?chat_id={tsettings.chat_id}&text={message}'
                 response = requests.post(url)
